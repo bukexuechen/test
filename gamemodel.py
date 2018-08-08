@@ -22,7 +22,7 @@ class GameField(object):
     def __init__(self, height=4, width=4, win=2048):
         self.height = height
         self.width = width
-        self.win_value = win
+        self.win_value = 2048
         self.score = 0
         self.highscore = 0
         self.reset()
