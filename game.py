@@ -43,7 +43,7 @@ class GameField(object):
         self.spawn()
 
     def move(self, direction):
-         def move_row_left(row):
+        def move_row_left(row):
             def tighten(row):
                 new_row = [i for i in row if i != 0]
                 new_row += [0 for i in range(len(row) - len(new_row))]
@@ -66,6 +66,7 @@ class GameField(object):
                 assert len(new_row) ==len(row)
                 return new_row
             return tighten(merge(tighten(row)))
+    
         moves = {}
         moves['Left']  = lambda field: [move_row_left(row) for row in field]
         moves['Right'] = lambda field: invert(moves['Left'](invert(field)))
@@ -90,9 +91,9 @@ class GameField(object):
         def row_is_left_movable(row):
             def change(i):
                 if row[i] == 0 and row[i + 1] != 0:
-                return True
+                    return True
                 if row[1] != 0 and row[i + 1] ==row[1]:
-                return True
+                    return True
                 return False
             return any(change(i) for i in range(len(row) - 1))
 
@@ -185,13 +186,13 @@ def main(stdscr):
             'Game': game
           }
 
-        curses.use_default_colors()
-        game_field = GameField(win=2048)
+    curses.use_default_colors()
+    game_field = GameField(win=2048)
 
 
-        state = 'Init'
+    state = 'Init'
 
-        while state != 'Exit':
-            state = state_actions[state]()
+    while state != 'Exit':
+        state = state_actions[state]()
 
-    curses.wrapper(main)
+curses.wrapper(main)
